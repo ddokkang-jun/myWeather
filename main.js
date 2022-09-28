@@ -8,6 +8,7 @@ const temp = document.querySelector(".temperature-value");
 const description = document.querySelector(".temperature-description");
 const locations = document.querySelector(".location-info");
 const notification = document.querySelector(".notification");
+const weatherContainer = document.querySelector(".weatherContainer");
 const weather = {};
 
 async function getWeather(lat, log) {
@@ -22,16 +23,30 @@ async function getWeather(lat, log) {
   weather.temp = Math.floor(temperatureData);
   weather.description = data.weather[0].description;
   weather.id = data.weather[0].icon;
+  weather.main = data.weather[0].main;
+  weather.country = data.sys.country;
 
   displayWeather();
+  
 }
 
 // display weather to UI
 function displayWeather() {
   icon.innerHTML = `<img src="images/${weather.id}.png" />`;
-  temp.innerHTML = `<p>${weather.temp} °<span>C</span></p>`;
+  temp.innerHTML = `<p>${weather.temp} °<span>c</span></p>`;
   description.innerHTML = `<p>${weather.description}</p>`;
-  locations.innerHTML = `<p>${weather.city}</p>`;
+  locations.innerHTML = `<p>${weather.city}</p> <p>${weather.country}</p>`;
+  displayBackground();
+}
+
+function displayBackground(){
+  if(weather.main == "Clouds"){
+    weatherContainer.style.backgroundImage = `url(images/Clouds.jpg)`;
+  }else if(weather.main == "Rain"){
+    weatherContainer.style.backgroundImage = `url(images/Rain.jpg)`;
+  }else if(weather.main == "Snow"){
+    weatherContainer.style.backgroundImage = `url(images/Snow.jpg)`;
+  }
 }
 
 // check if browser supports geolocation

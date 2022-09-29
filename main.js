@@ -10,44 +10,8 @@ const locations = document.querySelector(".location-info");
 const notification = document.querySelector(".notification");
 const weatherContainer = document.querySelector(".weatherContainer");
 const weather = {};
-
-async function getWeather(lat, log) {
-  let url = new URL(
-    `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${log}&appid=${API_KEY}&units=metric`
-  );
-  let data = await fetch(url).then((response) => response.json());
-
-  console.log(data);
-  weather.city = data.name;
-  let temperatureData = data.main.temp;
-  weather.temp = Math.floor(temperatureData);
-  weather.description = data.weather[0].description;
-  weather.id = data.weather[0].icon;
-  weather.main = data.weather[0].main;
-  weather.country = data.sys.country;
-
-  displayWeather();
-  
-}
-
-// display weather to UI
-function displayWeather() {
-  icon.innerHTML = `<img src="images/${weather.id}.png" />`;
-  temp.innerHTML = `<p>${weather.temp} °<span>c</span></p>`;
-  description.innerHTML = `<p>${weather.description}</p>`;
-  locations.innerHTML = `<p>${weather.city}</p> <p>${weather.country}</p>`;
-  displayBackground();
-}
-
-function displayBackground(){
-  if(weather.main == "Clouds"){
-    weatherContainer.style.backgroundImage = `url(images/Clouds.jpg)`;
-  }else if(weather.main == "Rain"){
-    weatherContainer.style.backgroundImage = `url(images/Rain.jpg)`;
-  }else if(weather.main == "Snow"){
-    weatherContainer.style.backgroundImage = `url(images/Snow.jpg)`;
-  }
-}
+let now = new Date();
+now = now.getHours();
 
 // check if browser supports geolocation
 if ("geolocation" in navigator) {
@@ -68,6 +32,70 @@ function setPosition(position) {
 function showError(error) {
   notification.style.display = "block";
   notification.innerHTML = `<p>${error.message}</p>`;
+}
+
+async function getWeather(lat, log) {
+  let url = new URL(
+    `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${log}&appid=${API_KEY}&units=metric`
+  );
+  let data = await fetch(url).then((response) => response.json());
+
+  console.log(data);
+  weather.city = data.name; // 도시이름
+  let temperatureData = data.main.temp;
+  weather.temp = Math.floor(temperatureData); // 온도
+  weather.description = data.weather[0].description; // 날씨설명
+  weather.id = data.weather[0].icon; // 날씨 아이콘
+  weather.main = data.weather[0].main; // 날씨상태
+  weather.country = data.sys.country; // 국가명
+
+  if (6 < now && now < 18) {
+    callAM();
+  } else if (now >= 18 || now <= 6) {
+    callPM();
+  }
+}
+
+function callAM() {
+  displayWeather();
+  if (weather.main == "Cloud") {
+    // 구름낀 오전
+    weatherContainer.style.backgroundImage = `url(images/Clouds.jpg)`;
+  } else if (weather.main == "Clear") {
+    // 화창한 오전
+    weatherContainer.style.backgroundImage = `url(images/clean-am02.jpg)`;
+  } else if (weather.main == "Rain") {
+    // 비내리는 오전
+    weatherContainer.style.backgroundImage = `url(images/Rain.jpg)`;
+  } else {
+    // 눈내리는 오전
+    weatherContainer.style.backgroundImage = `url(images/Snow.jpg)`;
+  }
+}
+
+function callPM() {
+  displayWeather();
+  if (weather.main == "Cloud") {
+    // 구름낀 오후
+    weatherContainer.style.backgroundImage = `url(images/cloud-night.jpg)`;
+  } else if (weather.main == "Clear") {
+    // 화창한 오후
+    weatherContainer.style.backgroundImage = `url(images/clean-night02.jpg)`;
+  } else if (weather.main == "Rain") {
+    // 비내리는 오후
+    weatherContainer.style.backgroundImage = `url(images/rain-night.jpg)`;
+  } else {
+    // 눈내리는 오후
+    weatherContainer.style.backgroundImage = `url(images/snow-night.jpg)`;
+  }
+}
+
+// display weather to UI
+function displayWeather() {
+  icon.innerHTML = `<img src="images/${weather.id}.png" />`;
+  temp.innerHTML = `<p>${weather.temp} °<span>c</span></p>`;
+  description.innerHTML = `<p>${weather.description}</p>`;
+  locations.innerHTML = `<p>${weather.city}</p> <p>${weather.country}</p>`;
 }
 
 getWeather();

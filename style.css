@@ -39,6 +39,7 @@ body {
 }
 .weatherContainer {
   background-image: url(images/Clouds.jpg);
+  background-size: cover;
   height: 95vh;
   border-radius: 10px;
 }

@@ -59,16 +59,12 @@ async function getWeather(lat, log) {
 function callAM() {
   displayWeather();
   if (weather.main == "Cloud") {
-    // 구름낀 오전
     weatherContainer.style.backgroundImage = `url(images/Clouds.jpg)`;
   } else if (weather.main == "Clear") {
-    // 화창한 오전
     weatherContainer.style.backgroundImage = `url(images/clean-am02.jpg)`;
   } else if (weather.main == "Rain") {
-    // 비내리는 오전
     weatherContainer.style.backgroundImage = `url(images/Rain.jpg)`;
   } else {
-    // 눈내리는 오전
     weatherContainer.style.backgroundImage = `url(images/Snow.jpg)`;
   }
 }
@@ -76,16 +72,12 @@ function callAM() {
 function callPM() {
   displayWeather();
   if (weather.main == "Cloud") {
-    // 구름낀 오후
     weatherContainer.style.backgroundImage = `url(images/cloud-night.jpg)`;
   } else if (weather.main == "Clear") {
-    // 화창한 오후
     weatherContainer.style.backgroundImage = `url(images/clean-night02.jpg)`;
   } else if (weather.main == "Rain") {
-    // 비내리는 오후
     weatherContainer.style.backgroundImage = `url(images/rain-night.jpg)`;
   } else {
-    // 눈내리는 오후
     weatherContainer.style.backgroundImage = `url(images/snow-night.jpg)`;
   }
 }

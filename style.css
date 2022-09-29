@@ -18,16 +18,13 @@ p, span {
   color: white;
 }
 body {
-  /* background-color: #4C75A3; */
   background-color: white;
 }
 .container {
   margin: auto;
-  /* margin-top: 20px; */
   width: 50%;
   min-width: 400px;
   height: 100vh;
-  /* min-height: 100vh; */
   text-align: center;
   font-weight: var(--font-size--medium);
   font-size: var(--font-size-large);
@@ -38,10 +35,8 @@ body {
   padding: 30px;
 }
 .weatherContainer {
-  background-image: url(images/Clouds.jpg);
   background-size: cover;
   height: 100vh;
-  /* border-radius: 10px; */
 }
 .weather-icon {
   padding: 50px;

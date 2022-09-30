@@ -58,7 +58,7 @@ async function getWeather(lat, log) {
 
 function callAM() {
   displayWeather();
-  if (weather.main == "Cloud") {
+  if (weather.main == "Clouds") {
     weatherContainer.style.backgroundImage = `url(images/Clouds.jpg)`;
   } else if (weather.main == "Clear") {
     weatherContainer.style.backgroundImage = `url(images/clean-am02.jpg)`;
@@ -71,8 +71,8 @@ function callAM() {
 
 function callPM() {
   displayWeather();
-  if (weather.main == "Cloud") {
-    weatherContainer.style.backgroundImage = `url(images/cloud-night.jpg)`;
+  if (weather.main == "Clouds") {
+    weatherContainer.style.backgroundImage = `url(images/cloud-night04.jpg)`;
   } else if (weather.main == "Clear") {
     weatherContainer.style.backgroundImage = `url(images/clean-night02.jpg)`;
   } else if (weather.main == "Rain") {

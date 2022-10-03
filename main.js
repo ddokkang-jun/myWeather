@@ -63,7 +63,7 @@ function callAM() {
   } else if (weather.main == "Clear") {
     weatherContainer.style.backgroundImage = `url(images/clean-am02.jpg)`;
   } else if (weather.main == "Rain") {
-    weatherContainer.style.backgroundImage = `url(images/Rain.jpg)`;
+    weatherContainer.style.backgroundImage = `url(images/Rain02.jpg)`;
   } else {
     weatherContainer.style.backgroundImage = `url(images/Snow.jpg)`;
   }
